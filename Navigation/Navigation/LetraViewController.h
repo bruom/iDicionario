@@ -10,4 +10,6 @@
 
 @interface LetraViewController : UIViewController
 
+@property UIImageView *imagem;
+
 @end
