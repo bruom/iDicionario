@@ -125,9 +125,16 @@ UIButton *botao;
 }
 
 -(void)toqueImagemHandler:(UILongPressGestureRecognizer *)touch{
-    
+    dss = [DataSourceSingleton instance];
     if(touch.state == UIGestureRecognizerStateBegan){
         [UIView animateWithDuration:0.4 animations:^{
+            
+            AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc]init];
+            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:[dss.palavras objectAtIndex:thisLetra]];
+            [utterance setPitchMultiplier:1.15f];
+            utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"pt-BR"];
+            [utterance setRate:0.03f];
+            [synthesizer speakUtterance:utterance];
             imagem. transform = CGAffineTransformConcat(CGAffineTransformMakeScale(1.5, 1.5), CGAffineTransformMakeTranslation(0.0, 50.0));
             botao.transform = CGAffineTransformMakeTranslation(0.0, 110.0);
         }];

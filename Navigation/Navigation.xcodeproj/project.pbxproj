@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15AFDCF61AB87ADD00DD94CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFDCF51AB87ADD00DD94CE /* AVFoundation.framework */; };
 		15B109D71AB74AF500FF3539 /* DataSourceSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */; };
 		15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D91AB74CBF00FF3539 /* LetraViewController.m */; };
 		27156F4D18B76AF50053A99C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F4C18B76AF50053A99C /* Foundation.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15AFDCF31AB87AA000DD94CE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		15AFDCF51AB87ADD00DD94CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		15B109D51AB74AF500FF3539 /* DataSourceSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceSingleton.h; sourceTree = "<group>"; };
 		15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceSingleton.m; sourceTree = "<group>"; };
 		15B109D81AB74CBF00FF3539 /* LetraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetraViewController.h; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15AFDCF61AB87ADD00DD94CE /* AVFoundation.framework in Frameworks */,
 				27156F4F18B76AF50053A99C /* CoreGraphics.framework in Frameworks */,
 				27156F5118B76AF50053A99C /* UIKit.framework in Frameworks */,
 				27156F4D18B76AF50053A99C /* Foundation.framework in Frameworks */,
@@ -102,6 +106,8 @@
 		27156F4B18B76AF50053A99C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15AFDCF51AB87ADD00DD94CE /* AVFoundation.framework */,
+				15AFDCF31AB87AA000DD94CE /* AVKit.framework */,
 				27156F4C18B76AF50053A99C /* Foundation.framework */,
 				27156F4E18B76AF50053A99C /* CoreGraphics.framework */,
 				27156F5018B76AF50053A99C /* UIKit.framework */,
