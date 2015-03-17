@@ -7,13 +7,13 @@
 //
 
 #import "MackenzieAppDelegate.h"
-#import "LetraViewController.h"
+#import "BuscaViewController.h"
 
 @implementation MackenzieAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    LetraViewController *viewController = [[LetraViewController alloc]
+    BuscaViewController *viewController = [[BuscaViewController alloc]
                                            initWithNibName:nil
                                            bundle:nil];
     

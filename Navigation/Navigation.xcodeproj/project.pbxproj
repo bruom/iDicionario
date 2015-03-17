@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15AFDCF61AB87ADD00DD94CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFDCF51AB87ADD00DD94CE /* AVFoundation.framework */; };
+		15AFDCF91AB883F400DD94CE /* BuscaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFDCF81AB883F400DD94CE /* BuscaViewController.m */; };
 		15B109D71AB74AF500FF3539 /* DataSourceSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */; };
 		15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D91AB74CBF00FF3539 /* LetraViewController.m */; };
 		27156F4D18B76AF50053A99C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F4C18B76AF50053A99C /* Foundation.framework */; };
@@ -37,6 +38,8 @@
 /* Begin PBXFileReference section */
 		15AFDCF31AB87AA000DD94CE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		15AFDCF51AB87ADD00DD94CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		15AFDCF71AB883F400DD94CE /* BuscaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuscaViewController.h; sourceTree = "<group>"; };
+		15AFDCF81AB883F400DD94CE /* BuscaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuscaViewController.m; sourceTree = "<group>"; };
 		15B109D51AB74AF500FF3539 /* DataSourceSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceSingleton.h; sourceTree = "<group>"; };
 		15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceSingleton.m; sourceTree = "<group>"; };
 		15B109D81AB74CBF00FF3539 /* LetraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetraViewController.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */,
 				15B109D81AB74CBF00FF3539 /* LetraViewController.h */,
 				15B109D91AB74CBF00FF3539 /* LetraViewController.m */,
+				15AFDCF71AB883F400DD94CE /* BuscaViewController.h */,
+				15AFDCF81AB883F400DD94CE /* BuscaViewController.m */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */,
 				15B109D71AB74AF500FF3539 /* DataSourceSingleton.m in Sources */,
 				27156F5918B76AF50053A99C /* main.m in Sources */,
+				15AFDCF91AB883F400DD94CE /* BuscaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
