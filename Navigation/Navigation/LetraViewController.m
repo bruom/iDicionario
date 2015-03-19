@@ -32,7 +32,7 @@ UIBarButtonItem *toolBarEdit;
     dss = [DataSourceSingleton instance];
     NSLog(@"%d", dss.letra);
     
-    self.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
     
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(next:)];

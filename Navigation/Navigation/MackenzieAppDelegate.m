@@ -7,14 +7,17 @@
 //
 
 #import "MackenzieAppDelegate.h"
-#import "LetrasTabBarController.h"
+#import "LetrasTableViewController.h"
+#import "BuscaViewController.h"
 
 @implementation MackenzieAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    LetrasTabBarController *tbc = [[LetrasTabBarController alloc]init];
+    UITabBarController *tbc = [[UITabBarController alloc]init];
+    
+    tbc.view.backgroundColor = [UIColor whiteColor];
     
     self.window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -24,6 +27,21 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    BuscaViewController *viewController = [[BuscaViewController alloc]
+                                           initWithNibName:nil
+                                           bundle:nil];
+    
+    
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:viewController];
+    
+    LetrasTableViewController *tvc = [[LetrasTableViewController alloc]init];
+    
+    navController.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Letras" image:nil tag:1];
+    tvc.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"TableView" image:nil tag:2];
+    
+    [tbc setViewControllers:[NSArray arrayWithObjects:navController, tvc, nil]];
     
     return YES;
 }
