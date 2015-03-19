@@ -8,6 +8,7 @@
 
 #import "LetrasTableViewController.h"
 #import "DataSourceSingleton.h"
+#import "LetraViewController.h"
 
 @interface LetrasTableViewController ()
 
@@ -34,6 +35,10 @@ DataSourceSingleton *dss;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -58,6 +63,19 @@ DataSourceSingleton *dss;
     
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //LetraViewController *viewLetra = [[LetraViewController alloc]init];
+    dss.letra = (int)[indexPath row];
+    
+    //pega a navigation do view controller na outra tab, para evitar
+    UINavigationController *navOriginal = [self.tabBarController.viewControllers objectAtIndex:0];
+    
+    [navOriginal pushViewController:[[LetraViewController alloc]init] animated:YES];
+    
+    self.tabBarController.selectedIndex = 0;
+    
 }
 
 

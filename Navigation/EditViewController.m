@@ -23,6 +23,8 @@ UIToolbar *toolbar;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self.navigationItem setHidesBackButton:YES];
     
     dss = [DataSourceSingleton instance];

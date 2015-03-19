@@ -19,8 +19,7 @@
 @synthesize imagem;
 
 DataSourceSingleton *dss;
-int thisLetra;
-UITextField *texto;
+UILabel *texto;
 UIToolbar *toolbar;
 UIBarButtonItem *toolBarEdit;
 
@@ -31,10 +30,9 @@ UIBarButtonItem *toolBarEdit;
     [self.navigationItem setHidesBackButton:YES];
     
     dss = [DataSourceSingleton instance];
-    NSLog(@"%d", thisLetra);
-    thisLetra = dss.letra;
+    NSLog(@"%d", dss.letra);
     
-    self.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]];
+    self.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
     
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(next:)];
@@ -47,7 +45,7 @@ UIBarButtonItem *toolBarEdit;
     
     
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]]]];
     imagem.userInteractionEnabled = YES;
     imagem.layer.cornerRadius = 100;
     imagem.layer.masksToBounds = YES;
@@ -59,15 +57,14 @@ UIBarButtonItem *toolBarEdit;
 //                       buttonWithType:UIButtonTypeSystem];
 //    [botao
 //     //setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
-//     setTitle: [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:thisLetra]]
+//     setTitle: [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]]
 //     forState:UIControlStateNormal];
 //    [botao sizeToFit];
 //    botao.center = self.view.center;
     
-    texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
-    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:thisLetra]];
+    texto = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
+    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]];
     texto.textAlignment = UITextAlignmentCenter;
-    [texto setEnabled:NO];
     texto.center = self.view.center;
     
     toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 90), self.view.frame.size.width, 40)];
@@ -88,7 +85,7 @@ UIBarButtonItem *toolBarEdit;
 
 -(void) viewWillAppear:(BOOL)animated{
     [self atualizaConteudo];
-    thisLetra = [DataSourceSingleton instance].letra;
+    dss.letra = [DataSourceSingleton instance].letra;
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     imagem.transform = CGAffineTransformMakeScale(0.5, 0.5);
@@ -98,7 +95,7 @@ UIBarButtonItem *toolBarEdit;
 
 -(void) viewDidAppear:(BOOL)animated{
     
-    NSLog(@"appear %d", thisLetra);
+    NSLog(@"appear %d", dss.letra);
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(1.0, 1.0);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
@@ -114,20 +111,6 @@ UIBarButtonItem *toolBarEdit;
     // Dispose of any resources that can be recreated.
 }
 
-//-(void)reInicializador{
-//    self.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]];
-//    
-//    imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-//    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]]]];
-//    
-//    [botao
-//     //setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
-//     setTitle: [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:thisLetra]]
-//     forState:UIControlStateNormal];
-//    botao.center = self.view.center;
-//    
-//}
-
 -(void)next:(id)sender {
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationItem.leftBarButtonItem.enabled = NO;
@@ -136,24 +119,12 @@ UIBarButtonItem *toolBarEdit;
     if(dss.letra>25)
         dss.letra=0;
     
-    //UIViewController *proximo;
     
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
     } completion:^(BOOL finished) {
-        //[self reInicializador];
-//        if(self.navigationController.viewControllers.count >= 3){
-//            NSArray *novoViews = [[NSArray alloc]initWithObjects:[self.navigationController.viewControllers objectAtIndex:1], [self.navigationController.viewControllers objectAtIndex:2], nil];
-//            self.navigationController.viewControllers = novoViews;
-//            [self.navigationController pushViewController:[[LetraViewController alloc]init] animated:YES];
-//        }
-//        else{
-//            LetraViewController *proximo = [[LetraViewController alloc]
-//                                            initWithNibName:nil
-//                                            bundle:NULL];
-//            [self.navigationController pushViewController:proximo animated:YES];
-//        }
+
         LetraViewController *proximo = [[LetraViewController alloc]init];
         if(self.navigationController.viewControllers.count >= 3){
             //[self.navigationController popViewControllerAnimated:YES];
@@ -216,6 +187,16 @@ UIBarButtonItem *toolBarEdit;
     
 }
 
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    //deve ter um jeito de especificar ja a subview aqui... parece pouco eficiente deste jeito...
+    UITouch *toque = [touches anyObject];
+    
+    //verifica se tocou na imagem... ainda acho que existe jeito melhor
+    if([toque.view isEqual:imagem]){
+        toque.view.center = [toque locationInView:self.view];
+    }
+}
+
 -(void)editar:(id)sender{
 //    [texto setEnabled:YES];
 //    [texto setSelected:YES];
@@ -224,10 +205,10 @@ UIBarButtonItem *toolBarEdit;
 }
 
 -(void)atualizaConteudo{
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]]]];
     NSLog(@"%d %@", dss.letra, [dss.palavras objectAtIndex:dss.letra]);
     texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]];
-    self.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
 }
 
 
