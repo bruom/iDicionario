@@ -154,7 +154,6 @@ UIBarButtonItem *toolBarEdit;
         imagem.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
     } completion:^(BOOL finished) {
-        LetraViewController *proximo = [[LetraViewController alloc]init];
         if(self.navigationController.viewControllers.count >= 3){
             [self.navigationController popViewControllerAnimated:YES];
             self.navigationController.viewControllers = [[NSArray alloc ]initWithObjects:[[LetraViewController alloc]init], [self.navigationController.viewControllers objectAtIndex:0], [self.navigationController.viewControllers objectAtIndex:1], nil];

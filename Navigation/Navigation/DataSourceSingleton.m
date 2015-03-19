@@ -7,6 +7,7 @@
 //
 
 #import "DataSourceSingleton.h"
+#import <Realm/Realm.h>
 
 @implementation DataSourceSingleton
 

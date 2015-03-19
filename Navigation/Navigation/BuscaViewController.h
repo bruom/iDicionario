@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BuscaViewController : UIViewController
+@interface BuscaViewController : UIViewController <UITextFieldDelegate>
 
 @end

@@ -13,6 +13,8 @@
 		15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D91AB74CBF00FF3539 /* LetraViewController.m */; };
 		15B35E221ABA105D0033B8FE /* LetrasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */; };
 		15F0FEB61ABAFFA000DA31AD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F0FEB51ABAFFA000DA31AD /* EditViewController.m */; };
+		15F0FEBA1ABB5EBB00DA31AD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F0FEB91ABB5EBB00DA31AD /* Realm.framework */; };
+		15F0FEBE1ABB5F2800DA31AD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F0FEBD1ABB5F2800DA31AD /* libc++.dylib */; };
 		27156F4D18B76AF50053A99C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F4C18B76AF50053A99C /* Foundation.framework */; };
 		27156F4F18B76AF50053A99C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F4E18B76AF50053A99C /* CoreGraphics.framework */; };
 		27156F5118B76AF50053A99C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F5018B76AF50053A99C /* UIKit.framework */; };
@@ -50,6 +52,9 @@
 		15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetrasTableViewController.m; sourceTree = "<group>"; };
 		15F0FEB41ABAFFA000DA31AD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = ../EditViewController.h; sourceTree = "<group>"; };
 		15F0FEB51ABAFFA000DA31AD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = ../EditViewController.m; sourceTree = "<group>"; };
+		15F0FEB91ABB5EBB00DA31AD /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		15F0FEBB1ABB5EE600DA31AD /* libdbm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdbm.dylib; path = usr/lib/libdbm.dylib; sourceTree = SDKROOT; };
+		15F0FEBD1ABB5F2800DA31AD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		27156F4918B76AF50053A99C /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27156F4C18B76AF50053A99C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27156F4E18B76AF50053A99C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -73,10 +78,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F0FEBE1ABB5F2800DA31AD /* libc++.dylib in Frameworks */,
 				15AFDCF61AB87ADD00DD94CE /* AVFoundation.framework in Frameworks */,
 				27156F4F18B76AF50053A99C /* CoreGraphics.framework in Frameworks */,
 				27156F5118B76AF50053A99C /* UIKit.framework in Frameworks */,
 				27156F4D18B76AF50053A99C /* Foundation.framework in Frameworks */,
+				15F0FEBA1ABB5EBB00DA31AD /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +103,7 @@
 		27156F4018B76AF50053A99C = {
 			isa = PBXGroup;
 			children = (
+				15F0FEB91ABB5EBB00DA31AD /* Realm.framework */,
 				27156F5218B76AF50053A99C /* Navigation */,
 				27156F6B18B76AF50053A99C /* NavigationTests */,
 				27156F4B18B76AF50053A99C /* Frameworks */,
@@ -115,6 +123,8 @@
 		27156F4B18B76AF50053A99C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15F0FEBD1ABB5F2800DA31AD /* libc++.dylib */,
+				15F0FEBB1ABB5EE600DA31AD /* libdbm.dylib */,
 				15AFDCF51AB87ADD00DD94CE /* AVFoundation.framework */,
 				15AFDCF31AB87AA000DD94CE /* AVKit.framework */,
 				27156F4C18B76AF50053A99C /* Foundation.framework */,
@@ -396,6 +406,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Navigation/Navigation-Prefix.pch";
 				INFOPLIST_FILE = "Navigation/Navigation-Info.plist";
@@ -409,6 +423,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Navigation/Navigation-Prefix.pch";
 				INFOPLIST_FILE = "Navigation/Navigation-Info.plist";

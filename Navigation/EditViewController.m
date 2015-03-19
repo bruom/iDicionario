@@ -45,6 +45,8 @@ UIToolbar *toolbar;
     NSArray *toolBarItems = [NSArray arrayWithObjects:toolBarConfirma, nil];
     [toolbar setItems:toolBarItems];
     
+    [texto becomeFirstResponder];
+    
     [self.view addSubview:imagem];
     [self.view addSubview:texto];
     [self.view addSubview:toolbar];
@@ -68,6 +70,10 @@ UIToolbar *toolbar;
     }
     [dss.palavras replaceObjectAtIndex:dss.letra withObject:texto.text];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [texto resignFirstResponder];
 }
 
 /*
