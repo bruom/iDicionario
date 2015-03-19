@@ -12,5 +12,6 @@
 @interface LetraViewController : UIViewController
 
 @property UIImageView *imagem;
+@property (strong) UILabel *texto;
 
 @end

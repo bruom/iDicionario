@@ -18,6 +18,7 @@
     UITabBarController *tbc = [[UITabBarController alloc]init];
     
     tbc.view.backgroundColor = [UIColor whiteColor];
+    tbc.tabBar.backgroundColor = [UIColor whiteColor];
     
     self.window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -35,6 +36,7 @@
     
     UINavigationController *navController = [[UINavigationController alloc]
                                              initWithRootViewController:viewController];
+    navController.navigationBar.backgroundColor = [UIColor whiteColor];
     
     LetrasTableViewController *tvc = [[LetrasTableViewController alloc]init];
     

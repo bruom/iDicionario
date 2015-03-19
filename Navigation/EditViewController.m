@@ -58,7 +58,15 @@ UIToolbar *toolbar;
 }
 
 -(void)confirmar:(id)sender{
-    [dss.palavras setObject:texto.text atIndexedSubscript:dss.letra];
+    NSError *erroRegex=nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]([a-z]| |\\+|\\(|\\)|'|\\^)*$" options:NSRegularExpressionCaseInsensitive error:&erroRegex];
+    
+    if(![regex numberOfMatchesInString:texto.text options:0 range:NSMakeRange(0, texto.text.length)]){
+        UIAlertView *termoInvalido = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Termo inválido!",nil) message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [termoInvalido show];
+        return;
+    }
+    [dss.palavras replaceObjectAtIndex:dss.letra withObject:texto.text];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

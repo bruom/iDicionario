@@ -17,16 +17,18 @@
 @implementation LetraViewController
 
 @synthesize imagem;
+@synthesize texto;
 
 DataSourceSingleton *dss;
-UILabel *texto;
+
 UIToolbar *toolbar;
 UIBarButtonItem *toolBarEdit;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Letra load");
-    self.view.backgroundColor = [UIColor whiteColor];
+    //self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor orangeColor];
     [self.navigationItem setHidesBackButton:YES];
     
     dss = [DataSourceSingleton instance];
@@ -84,12 +86,12 @@ UIBarButtonItem *toolBarEdit;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    texto.center = self.view.center;
     [self atualizaConteudo];
-    dss.letra = [DataSourceSingleton instance].letra;
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     imagem.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    texto.center = self.view.center;
+    
     
 }
 
@@ -207,7 +209,8 @@ UIBarButtonItem *toolBarEdit;
 -(void)atualizaConteudo{
     imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]]]];
     NSLog(@"%d %@", dss.letra, [dss.palavras objectAtIndex:dss.letra]);
-    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]];
+    [texto setText: [dss.palavras objectAtIndex:dss.letra ]];
+    
     self.navigationItem.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
 }
 
