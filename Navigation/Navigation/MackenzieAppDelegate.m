@@ -7,22 +7,18 @@
 //
 
 #import "MackenzieAppDelegate.h"
-#import "BuscaViewController.h"
+#import "LetrasTabBarController.h"
 
 @implementation MackenzieAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    BuscaViewController *viewController = [[BuscaViewController alloc]
-                                           initWithNibName:nil
-                                           bundle:nil];
     
+    LetrasTabBarController *tbc = [[LetrasTabBarController alloc]init];
     
-    self.navigationController = [[UINavigationController alloc]
-                                 initWithRootViewController:viewController];
     self.window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = tbc;
 
 
     

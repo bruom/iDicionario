@@ -10,8 +10,8 @@
 
 @interface DataSourceSingleton : NSObject
 
-@property NSArray *palavras;
-@property NSArray *imagens;
+@property NSMutableArray *palavras;
+@property NSMutableArray *imagens;
 @property int letra;
 
 +(DataSourceSingleton *)instance;

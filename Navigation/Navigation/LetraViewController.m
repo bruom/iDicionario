@@ -8,6 +8,7 @@
 
 #import "LetraViewController.h"
 #import "DataSourceSingleton.h"
+#import "EditViewController.h"
 
 @interface LetraViewController ()
 
@@ -19,7 +20,9 @@
 
 DataSourceSingleton *dss;
 int thisLetra;
-UIButton *botao;
+UITextField *texto;
+UIToolbar *toolbar;
+UIBarButtonItem *toolBarEdit;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
@@ -52,27 +55,44 @@ UIButton *botao;
     UILongPressGestureRecognizer *toqueImagem = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(toqueImagemHandler:)];
     [self.imagem addGestureRecognizer:toqueImagem];
     
-    botao = [UIButton
-                       buttonWithType:UIButtonTypeSystem];
-    [botao
-     //setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
-     setTitle: [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:thisLetra]]
-     forState:UIControlStateNormal];
-    [botao sizeToFit];
-    botao.center = self.view.center;
+//    botao = [UIButton
+//                       buttonWithType:UIButtonTypeSystem];
+//    [botao
+//     //setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
+//     setTitle: [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:thisLetra]]
+//     forState:UIControlStateNormal];
+//    [botao sizeToFit];
+//    botao.center = self.view.center;
     
-    [self.view addSubview:botao];
+    texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
+    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:thisLetra]];
+    texto.textAlignment = UITextAlignmentCenter;
+    [texto setEnabled:NO];
+    texto.center = self.view.center;
+    
+    toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 90), self.view.frame.size.width, 40)];
+    
+    toolBarEdit = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editar:)];
+   
+    NSArray *toolBarItems = [NSArray arrayWithObjects:toolBarEdit, nil];
+    [toolbar setItems:toolBarItems];
+    
+    
+    
+    [self.view addSubview:toolbar];
+    [self.view addSubview:texto];
     [self.view addSubview:imagem];
     
     
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    [self atualizaConteudo];
     thisLetra = [DataSourceSingleton instance].letra;
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     imagem.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    botao.center = self.view.center;
+    texto.center = self.view.center;
     
 }
 
@@ -81,7 +101,7 @@ UIButton *botao;
     NSLog(@"appear %d", thisLetra);
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        botao.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
+        texto.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
     }completion:^(BOOL finished) {
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -120,7 +140,7 @@ UIButton *botao;
     
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
-        botao.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
+        texto.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
     } completion:^(BOOL finished) {
         //[self reInicializador];
 //        if(self.navigationController.viewControllers.count >= 3){
@@ -159,7 +179,7 @@ UIButton *botao;
 
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
-        botao.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
+        texto.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
     } completion:^(BOOL finished) {
         LetraViewController *proximo = [[LetraViewController alloc]init];
         if(self.navigationController.viewControllers.count >= 3){
@@ -179,21 +199,36 @@ UIButton *botao;
         [UIView animateWithDuration:0.4 animations:^{
             
             AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc]init];
-            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:[dss.palavras objectAtIndex:thisLetra]];
+            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:texto.text];
             [utterance setPitchMultiplier:0.9f];
             utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"pt-BR"];
             [utterance setRate:0.03f];
             [synthesizer speakUtterance:utterance];
             imagem. transform = CGAffineTransformConcat(CGAffineTransformMakeScale(1.5, 1.5), CGAffineTransformMakeTranslation(0.0, 50.0));
-            botao.transform = CGAffineTransformMakeTranslation(0.0, 110.0);
+            texto.transform = CGAffineTransformMakeTranslation(0.0, 110.0);
         }];
     }else if(touch.state == UIGestureRecognizerStateEnded){
         [UIView animateWithDuration:0.4 animations:^{
             imagem. transform = CGAffineTransformConcat(CGAffineTransformMakeScale(1.0, 1.0), CGAffineTransformMakeTranslation(0.0, 0.0));
-            botao.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
+            texto.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
         }];
     }
     
 }
+
+-(void)editar:(id)sender{
+//    [texto setEnabled:YES];
+//    [texto setSelected:YES];
+    EditViewController *evc = [[EditViewController alloc]init];
+    [self.navigationController pushViewController:evc animated:YES];
+}
+
+-(void)atualizaConteudo{
+    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]]]];
+    NSLog(@"%d %@", dss.letra, [dss.palavras objectAtIndex:dss.letra]);
+    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]];
+    self.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:thisLetra] characterAtIndex:0]];
+}
+
 
 @end

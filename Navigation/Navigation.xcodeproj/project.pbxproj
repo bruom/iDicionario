@@ -11,6 +11,9 @@
 		15AFDCF91AB883F400DD94CE /* BuscaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFDCF81AB883F400DD94CE /* BuscaViewController.m */; };
 		15B109D71AB74AF500FF3539 /* DataSourceSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */; };
 		15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D91AB74CBF00FF3539 /* LetraViewController.m */; };
+		15B35E221ABA105D0033B8FE /* LetrasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */; };
+		15B35E251ABA10820033B8FE /* LetrasTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B35E241ABA10820033B8FE /* LetrasTabBarController.m */; };
+		15F0FEB61ABAFFA000DA31AD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F0FEB51ABAFFA000DA31AD /* EditViewController.m */; };
 		27156F4D18B76AF50053A99C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F4C18B76AF50053A99C /* Foundation.framework */; };
 		27156F4F18B76AF50053A99C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F4E18B76AF50053A99C /* CoreGraphics.framework */; };
 		27156F5118B76AF50053A99C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27156F5018B76AF50053A99C /* UIKit.framework */; };
@@ -44,6 +47,12 @@
 		15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceSingleton.m; sourceTree = "<group>"; };
 		15B109D81AB74CBF00FF3539 /* LetraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetraViewController.h; sourceTree = "<group>"; };
 		15B109D91AB74CBF00FF3539 /* LetraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetraViewController.m; sourceTree = "<group>"; };
+		15B35E201ABA105D0033B8FE /* LetrasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetrasTableViewController.h; sourceTree = "<group>"; };
+		15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetrasTableViewController.m; sourceTree = "<group>"; };
+		15B35E231ABA10820033B8FE /* LetrasTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetrasTabBarController.h; path = ../LetrasTabBarController.h; sourceTree = "<group>"; };
+		15B35E241ABA10820033B8FE /* LetrasTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetrasTabBarController.m; path = ../LetrasTabBarController.m; sourceTree = "<group>"; };
+		15F0FEB41ABAFFA000DA31AD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = ../EditViewController.h; sourceTree = "<group>"; };
+		15F0FEB51ABAFFA000DA31AD /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = ../EditViewController.m; sourceTree = "<group>"; };
 		27156F4918B76AF50053A99C /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27156F4C18B76AF50053A99C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27156F4E18B76AF50053A99C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,8 +137,14 @@
 				27156F5318B76AF50053A99C /* Supporting Files */,
 				15B109D51AB74AF500FF3539 /* DataSourceSingleton.h */,
 				15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */,
+				15F0FEB41ABAFFA000DA31AD /* EditViewController.h */,
+				15F0FEB51ABAFFA000DA31AD /* EditViewController.m */,
 				15B109D81AB74CBF00FF3539 /* LetraViewController.h */,
 				15B109D91AB74CBF00FF3539 /* LetraViewController.m */,
+				15B35E231ABA10820033B8FE /* LetrasTabBarController.h */,
+				15B35E241ABA10820033B8FE /* LetrasTabBarController.m */,
+				15B35E201ABA105D0033B8FE /* LetrasTableViewController.h */,
+				15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */,
 				15AFDCF71AB883F400DD94CE /* BuscaViewController.h */,
 				15AFDCF81AB883F400DD94CE /* BuscaViewController.m */,
 			);
@@ -265,6 +280,9 @@
 				15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */,
 				15B109D71AB74AF500FF3539 /* DataSourceSingleton.m in Sources */,
 				27156F5918B76AF50053A99C /* main.m in Sources */,
+				15F0FEB61ABAFFA000DA31AD /* EditViewController.m in Sources */,
+				15B35E251ABA10820033B8FE /* LetrasTabBarController.m in Sources */,
+				15B35E221ABA105D0033B8FE /* LetrasTableViewController.m in Sources */,
 				15AFDCF91AB883F400DD94CE /* BuscaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
