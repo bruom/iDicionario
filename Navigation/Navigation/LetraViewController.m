@@ -26,7 +26,7 @@ UIBarButtonItem *toolBarEdit;
 -(void) viewDidLoad {
     [super viewDidLoad];
     //self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.backgroundColor = [UIColor orangeColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setHidesBackButton:YES];
     
     dss = [DataSourceSingleton instance];
@@ -56,18 +56,9 @@ UIBarButtonItem *toolBarEdit;
     UILongPressGestureRecognizer *toqueImagem = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(toqueImagemHandler:)];
     [self.imagem addGestureRecognizer:toqueImagem];
     
-//    botao = [UIButton
-//                       buttonWithType:UIButtonTypeSystem];
-//    [botao
-//     //setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
-//     setTitle: [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]]
-//     forState:UIControlStateNormal];
-//    [botao sizeToFit];
-//    botao.center = self.view.center;
-    
     texto = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
     texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
-    texto.textAlignment = UITextAlignmentCenter;
+    texto.textAlignment = NSTextAlignmentCenter;
     texto.center = self.view.center;
     
     toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 90), self.view.frame.size.width, 40)];
@@ -98,7 +89,6 @@ UIBarButtonItem *toolBarEdit;
 
 -(void) viewDidAppear:(BOOL)animated{
     
-    NSLog(@"appear %d", dss.letra);
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(1.0, 1.0);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 20.0);

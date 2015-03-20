@@ -9,12 +9,14 @@
 #import "LetrasTableViewController.h"
 #import "DataSourceSingleton.h"
 #import "LetraViewController.h"
+#import "EntradaDicionario.h"
 
 @interface LetrasTableViewController ()
 
 @end
 
 DataSourceSingleton *dss;
+EntradaDicionario *entrada;
 
 @implementation LetrasTableViewController
 
@@ -48,7 +50,8 @@ DataSourceSingleton *dss;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return dss.palavras.count;
+    //seria bacana conseguir este valor a partir do result set do realm, vou ver se da depois
+    return 26;
 }
 
 
@@ -56,10 +59,10 @@ DataSourceSingleton *dss;
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"letraCell"];
     
     long row = [indexPath row];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:row] characterAtIndex:0]];
-    cell.detailTextLabel.text = [dss.palavras objectAtIndex:row];
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:row] characterAtIndex:0]]]];
+    entrada = [dss buscarPorIndice:(int)row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];
+    cell.detailTextLabel.text = entrada.palavra;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
     
     
     return cell;

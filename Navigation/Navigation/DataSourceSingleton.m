@@ -44,7 +44,8 @@ static DataSourceSingleton *instance;
         EntradaDicionario *entrada = [[EntradaDicionario alloc]init];
         entrada.palavra = [palavras objectAtIndex:i];
         entrada.letraIndex = i;
-        entrada.img = [NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[palavras objectAtIndex:i] characterAtIndex:0]]];
+        entrada.img = [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%c",[[[palavras objectAtIndex:i] lowercaseString] characterAtIndex:0]]];
+        NSLog(entrada.img);
         [realm beginWriteTransaction];
         [realm addObject:entrada];
         [realm commitWriteTransaction];
@@ -54,6 +55,7 @@ static DataSourceSingleton *instance;
 -(EntradaDicionario *)buscarPorIndice:(int)i{
     RLMResults *resultados = [EntradaDicionario objectsWhere:[NSString stringWithFormat:@"letraIndex=%d",i]];
     for(EntradaDicionario *resultado in resultados){
+        //Por precaução, visto que erros absurdos parecem comuns hoje em dia
         if(resultado.letraIndex == i){
             return resultado;
         }

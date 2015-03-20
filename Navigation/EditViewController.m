@@ -19,6 +19,7 @@ UITextField *texto;
 UIImageView *imagem;
 UIToolbar *toolbar;
 EntradaDicionario *entrada;
+UIImagePickerController *imagePicker;
 
 @implementation EditViewController
 
@@ -29,6 +30,11 @@ EntradaDicionario *entrada;
     
     [self.navigationItem setHidesBackButton:YES];
     
+    imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    
+    
     dss = [DataSourceSingleton instance];
     entrada = [dss buscarPorIndice:dss.letra];
     
@@ -37,7 +43,7 @@ EntradaDicionario *entrada;
     
     texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
     texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
-    texto.textAlignment = UITextAlignmentCenter;
+    texto.textAlignment = NSTextAlignmentCenter;
     [texto setEnabled:YES];
     texto.center = self.view.center;
     
@@ -45,7 +51,12 @@ EntradaDicionario *entrada;
     
     UIBarButtonItem *toolBarConfirma = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmar:)];
     
-    NSArray *toolBarItems = [NSArray arrayWithObjects:toolBarConfirma, nil];
+    UIBarButtonItem *picturePicker = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(imagePick:)];
+    
+    //para espaçar igualmente os items
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    NSArray *toolBarItems = [NSArray arrayWithObjects:spacer, toolBarConfirma, spacer, picturePicker, spacer, nil];
     [toolbar setItems:toolBarItems];
     
     [texto becomeFirstResponder];
@@ -78,6 +89,17 @@ EntradaDicionario *entrada;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [texto resignFirstResponder];
+}
+
+-(void)imagePick:(id)sender{
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else{
+        UIAlertView *noCamera = [[UIAlertView alloc]initWithTitle:@"Opa!" message:@"Este dispositivo nao tem camera." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [noCamera show];
+    }
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 /*
