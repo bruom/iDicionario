@@ -56,6 +56,8 @@ UIBarButtonItem *toolBarEdit;
     
     UILongPressGestureRecognizer *toqueImagem = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(toqueImagemHandler:)];
     [self.imagem addGestureRecognizer:toqueImagem];
+    UIPinchGestureRecognizer *pinchImagem = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchHandler:)];
+    [self.imagem addGestureRecognizer:pinchImagem];
     
     texto = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
     texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
@@ -188,6 +190,13 @@ UIBarButtonItem *toolBarEdit;
     if([toque.view isEqual:imagem]){
         toque.view.center = [toque locationInView:self.view];
     }
+}
+
+//pinch para dar resize
+//surpreentemente simples (graças a deus)
+- (IBAction)pinchHandler:(UIPinchGestureRecognizer *)pinch {
+    pinch.view.transform = CGAffineTransformScale(pinch.view.transform, pinch.scale, pinch.scale);
+    pinch.scale = 1;
 }
 
 -(void)editar:(id)sender{
