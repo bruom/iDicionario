@@ -19,6 +19,8 @@
 
 +(DataSourceSingleton *)instance;
 
+-(void)trocarEmIndice:(int)i porPalavra:(NSString*)palavra;
+
 -(EntradaDicionario *)buscarPorIndice:(int)i;
 
 @end

@@ -27,9 +27,6 @@ static DataSourceSingleton *instance;
             [useDef setObject:@"NAO" forKey:@"primeiraExecucao"];
         }
         _letra = 0;
-//        palavras = [NSMutableArray arrayWithObjects: @"Andorra", @"Bruxelas", @"Creta", @"Dublin", @"Edinburgo", @"Freetown", @"Gibraltar", @"Helsinki", @"Islamabad", @"Jerusalem", @"Kiev", @"Londres", @"Monaco", @"Nuuk", @"Oslo", @"Praga", @"Quito", @"Roma", @"Seul", @"Toquio", @"Ulan Bator", @"Viena", @"Warsaw", @"Xangri-la", @"Yerevan", @"Zagreb", nil];
-//        imagens = [NSArray arrayWithObjects: @"a.jpg", @"b.jpg", @"c.jpg", @"d.jpg", @"e.jpg", @"f.jpg", @"g.jpg", @"h.jpg", @"i.jpg", @"j.jpg", @"k.jpg", @"l.jpg", @"m.jpg", @"n.jpg", @"o.jpg", @"p.jpg", @"q.jpg", @"r.jpg", @"s.jpg", @"t.jpg", @"u.jpg", @"v.jpg", @"w.jpg", @"x.jpg", @"y.jpg", @"z.jpg", nil];
-        
     }
     return self;
 }
@@ -62,6 +59,17 @@ static DataSourceSingleton *instance;
         }
     }
     return nil;
+}
+
+-(void)trocarEmIndice:(int)i porPalavra:(NSString *)palavra{
+    RLMResults *resultados = [EntradaDicionario objectsWhere:[NSString stringWithFormat:@"letraIndex=%d",i]];
+    for(EntradaDicionario *resultado in resultados){
+        if(resultado.letraIndex == i){
+            [realm beginWriteTransaction];
+            resultado.palavra = palavra;
+            [realm commitWriteTransaction];
+        }
+    }
 }
 
 @end

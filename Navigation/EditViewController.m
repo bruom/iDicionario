@@ -8,6 +8,7 @@
 
 #import "EditViewController.h"
 #import "DataSourceSingleton.h"
+#import "EntradaDicionario.h"
 
 @interface EditViewController ()
 
@@ -17,6 +18,7 @@ DataSourceSingleton *dss;
 UITextField *texto;
 UIImageView *imagem;
 UIToolbar *toolbar;
+EntradaDicionario *entrada;
 
 @implementation EditViewController
 
@@ -28,12 +30,13 @@ UIToolbar *toolbar;
     [self.navigationItem setHidesBackButton:YES];
     
     dss = [DataSourceSingleton instance];
+    entrada = [dss buscarPorIndice:dss.letra];
     
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
     
     texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
-    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]];
+    texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
     texto.textAlignment = UITextAlignmentCenter;
     [texto setEnabled:YES];
     texto.center = self.view.center;
@@ -68,7 +71,8 @@ UIToolbar *toolbar;
         [termoInvalido show];
         return;
     }
-    [dss.palavras replaceObjectAtIndex:dss.letra withObject:texto.text];
+    //Agora feito por Realm! Mudanças persistem!
+    [dss trocarEmIndice:dss.letra porPalavra:texto.text];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
