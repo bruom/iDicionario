@@ -62,7 +62,7 @@ EntradaDicionario *entrada;
     entrada = [dss buscarPorIndice:(int)row];
     cell.textLabel.text = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];
     cell.detailTextLabel.text = entrada.palavra;
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
+    cell.imageView.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:(int)row].img]];;
     
     
     return cell;

@@ -48,7 +48,8 @@ UIBarButtonItem *toolBarEdit;
     
     
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
+//    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
     imagem.userInteractionEnabled = YES;
     imagem.layer.cornerRadius = 100;
     imagem.layer.masksToBounds = YES;
@@ -197,7 +198,7 @@ UIBarButtonItem *toolBarEdit;
 }
 
 -(void)atualizaConteudo{
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
     [texto setText: entrada.palavra];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];

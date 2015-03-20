@@ -102,6 +102,16 @@ UIImagePickerController *imagePicker;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+    UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+    [dss salvarFoto:img comNome:[NSString stringWithFormat:@"nova_%c", dss.letra ] eLetra:dss.letra];
+    imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
+}
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+}
+
 /*
 #pragma mark - Navigation
 

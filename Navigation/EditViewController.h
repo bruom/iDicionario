@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditViewController : UITabBarController
+@interface EditViewController : UITabBarController <UIImagePickerControllerDelegate>
 
 @end

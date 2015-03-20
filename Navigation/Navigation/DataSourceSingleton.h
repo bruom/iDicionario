@@ -23,4 +23,6 @@
 
 -(EntradaDicionario *)buscarPorIndice:(int)i;
 
+-(void)salvarFoto:(UIImage *)foto comNome:(NSString *)nome eLetra:(int)letra;
+
 @end

@@ -74,4 +74,17 @@ static DataSourceSingleton *instance;
     }
 }
 
+-(void)salvarFoto:(UIImage *)foto comNome:(NSString *)nome eLetra:(int)letra{
+    nome = [NSString stringWithFormat:@"%@.png", nome];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [[paths firstObject] stringByAppendingPathComponent:nome];
+    NSData *data = UIImagePNGRepresentation(foto);
+    [data writeToFile:path atomically:YES];
+    RLMResults *resultados = [EntradaDicionario objectsWhere:[NSString stringWithFormat:@"letraIndex=%d",letra]];
+    EntradaDicionario *entrada = [resultados firstObject];
+    [realm beginWriteTransaction];
+    entrada.img = path;
+    [realm commitWriteTransaction];
+}
+
 @end
