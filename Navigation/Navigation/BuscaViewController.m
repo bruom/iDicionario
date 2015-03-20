@@ -22,6 +22,7 @@ UIButton *botaoBusca;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    dss = [DataSourceSingleton instance];
     
     UIButton *botao = [UIButton buttonWithType:UIButtonTypeSystem];
     [botao setTitle:@"A" forState:UIControlStateNormal];
@@ -70,7 +71,9 @@ UIButton *botaoBusca;
         [termoInvalido show];
         return;
     }
-
+    
+    NSString *TESTETESTE123 = [dss buscarPorIndice:2].palavra;
+    NSLog(@"%@",TESTETESTE123);
     BOOL achou = NO;
     NSLog(@"Buscando");
     NSString *termo = textoBusca.text;

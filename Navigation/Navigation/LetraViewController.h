@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "EntradaDicionario.h"
 
 @interface LetraViewController : UIViewController
 
 @property UIImageView *imagem;
 @property (strong) UILabel *texto;
+@property (strong) EntradaDicionario *entrada;
 
 @end

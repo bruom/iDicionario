@@ -16,8 +16,7 @@
 
 @implementation LetraViewController
 
-@synthesize imagem;
-@synthesize texto;
+@synthesize imagem, texto, entrada;
 
 DataSourceSingleton *dss;
 
@@ -26,15 +25,17 @@ UIBarButtonItem *toolBarEdit;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"Letra load");
     //self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor orangeColor];
     [self.navigationItem setHidesBackButton:YES];
     
     dss = [DataSourceSingleton instance];
-    NSLog(@"%d", dss.letra);
+    entrada = [dss buscarPorIndice:dss.letra];
     
-    self.navigationItem.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
+    //self.navigationItem.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
+    //TENTANDO COM REALM
+    self.navigationItem.title = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];
+    
     
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(next:)];
@@ -47,7 +48,7 @@ UIBarButtonItem *toolBarEdit;
     
     
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
     imagem.userInteractionEnabled = YES;
     imagem.layer.cornerRadius = 100;
     imagem.layer.masksToBounds = YES;
@@ -65,7 +66,7 @@ UIBarButtonItem *toolBarEdit;
 //    botao.center = self.view.center;
     
     texto = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
-    texto.text = [NSString stringWithFormat:@"%@", [dss.palavras objectAtIndex:dss.letra]];
+    texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
     texto.textAlignment = UITextAlignmentCenter;
     texto.center = self.view.center;
     
@@ -206,11 +207,10 @@ UIBarButtonItem *toolBarEdit;
 }
 
 -(void)atualizaConteudo{
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]]]];
-    NSLog(@"%d %@", dss.letra, [dss.palavras objectAtIndex:dss.letra]);
-    [texto setText: [dss.palavras objectAtIndex:dss.letra ]];
+    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
+    [texto setText: entrada.palavra];
     
-    self.navigationItem.title = [NSString stringWithFormat:@"%c",[[dss.palavras objectAtIndex:dss.letra] characterAtIndex:0]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];
 }
 
 

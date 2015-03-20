@@ -11,6 +11,7 @@
 		15AFDCF91AB883F400DD94CE /* BuscaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFDCF81AB883F400DD94CE /* BuscaViewController.m */; };
 		15B109D71AB74AF500FF3539 /* DataSourceSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */; };
 		15B109DA1AB74CBF00FF3539 /* LetraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B109D91AB74CBF00FF3539 /* LetraViewController.m */; };
+		15B1459C1ABC585E00D5A372 /* EntradaDicionario.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1459B1ABC585E00D5A372 /* EntradaDicionario.m */; };
 		15B35E221ABA105D0033B8FE /* LetrasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */; };
 		15F0FEB61ABAFFA000DA31AD /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F0FEB51ABAFFA000DA31AD /* EditViewController.m */; };
 		15F0FEBA1ABB5EBB00DA31AD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F0FEB91ABB5EBB00DA31AD /* Realm.framework */; };
@@ -48,6 +49,8 @@
 		15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceSingleton.m; sourceTree = "<group>"; };
 		15B109D81AB74CBF00FF3539 /* LetraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetraViewController.h; sourceTree = "<group>"; };
 		15B109D91AB74CBF00FF3539 /* LetraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetraViewController.m; sourceTree = "<group>"; };
+		15B1459A1ABC585E00D5A372 /* EntradaDicionario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntradaDicionario.h; path = ../EntradaDicionario.h; sourceTree = "<group>"; };
+		15B1459B1ABC585E00D5A372 /* EntradaDicionario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntradaDicionario.m; path = ../EntradaDicionario.m; sourceTree = "<group>"; };
 		15B35E201ABA105D0033B8FE /* LetrasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetrasTableViewController.h; sourceTree = "<group>"; };
 		15B35E211ABA105D0033B8FE /* LetrasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetrasTableViewController.m; sourceTree = "<group>"; };
 		15F0FEB41ABAFFA000DA31AD /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = ../EditViewController.h; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				27156F5318B76AF50053A99C /* Supporting Files */,
 				15B109D51AB74AF500FF3539 /* DataSourceSingleton.h */,
 				15B109D61AB74AF500FF3539 /* DataSourceSingleton.m */,
+				15B1459A1ABC585E00D5A372 /* EntradaDicionario.h */,
+				15B1459B1ABC585E00D5A372 /* EntradaDicionario.m */,
 				15F0FEB41ABAFFA000DA31AD /* EditViewController.h */,
 				15F0FEB51ABAFFA000DA31AD /* EditViewController.m */,
 				15B109D81AB74CBF00FF3539 /* LetraViewController.h */,
@@ -287,6 +292,7 @@
 				27156F5918B76AF50053A99C /* main.m in Sources */,
 				15F0FEB61ABAFFA000DA31AD /* EditViewController.m in Sources */,
 				15B35E221ABA105D0033B8FE /* LetrasTableViewController.m in Sources */,
+				15B1459C1ABC585E00D5A372 /* EntradaDicionario.m in Sources */,
 				15AFDCF91AB883F400DD94CE /* BuscaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
