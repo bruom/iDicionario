@@ -39,7 +39,7 @@ UIImagePickerController *imagePicker;
     entrada = [dss buscarPorIndice:dss.letra];
     
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
+    imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
     
     texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
     texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
