@@ -14,6 +14,7 @@
 
 @property UIImageView *imagem;
 @property (strong) UILabel *texto;
+@property (strong) UILabel *data;
 @property (strong) EntradaDicionario *entrada;
 
 @end

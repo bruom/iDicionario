@@ -16,12 +16,13 @@
 
 @implementation LetraViewController
 
-@synthesize imagem, texto, entrada;
+@synthesize imagem, texto, data, entrada;
 
 DataSourceSingleton *dss;
 
 UIToolbar *toolbar;
 UIBarButtonItem *toolBarEdit;
+NSDateFormatter *formatoData;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +38,7 @@ UIBarButtonItem *toolBarEdit;
     self.navigationItem.title = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];
     
     
+    //botoes do Navigation
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(next:)];
     self.navigationItem.rightBarButtonItem=next;
@@ -47,8 +49,8 @@ UIBarButtonItem *toolBarEdit;
     self.navigationItem.leftBarButtonItem=prev;
     
     
+    //imagem
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
-//    imagem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg", [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]]]];
     imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
     imagem.userInteractionEnabled = YES;
     imagem.layer.cornerRadius = 100;
@@ -59,11 +61,21 @@ UIBarButtonItem *toolBarEdit;
     UIPinchGestureRecognizer *pinchImagem = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchHandler:)];
     [self.imagem addGestureRecognizer:pinchImagem];
     
+    //labels - palavra e data
     texto = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
     texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
     texto.textAlignment = NSTextAlignmentCenter;
     texto.center = self.view.center;
     
+    formatoData = [[NSDateFormatter alloc]init];
+    formatoData.dateStyle = NSDateIntervalFormatterMediumStyle;
+    formatoData.locale = [NSLocale currentLocale];
+    
+    data = [[UILabel alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 20)];
+    data.text = [NSString stringWithFormat:@"%@", [formatoData stringFromDate:entrada.data]];
+    data.textAlignment = NSTextAlignmentCenter;
+    
+    //toolbar e items
     toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 90), self.view.frame.size.width, 40)];
     
     toolBarEdit = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editar:)];
@@ -72,9 +84,10 @@ UIBarButtonItem *toolBarEdit;
     [toolbar setItems:toolBarItems];
     
     
-    
+    //add subviews
     [self.view addSubview:toolbar];
     [self.view addSubview:texto];
+    [self.view addSubview:data];
     [self.view addSubview:imagem];
     
     
@@ -95,6 +108,7 @@ UIBarButtonItem *toolBarEdit;
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(1.0, 1.0);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
+        data.transform = CGAffineTransformMakeTranslation(0.0, 0.0);
     }completion:^(BOOL finished) {
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -119,6 +133,7 @@ UIBarButtonItem *toolBarEdit;
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
+        data.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
     } completion:^(BOOL finished) {
 
         LetraViewController *proximo = [[LetraViewController alloc]init];
@@ -147,6 +162,7 @@ UIBarButtonItem *toolBarEdit;
     [UIView animateWithDuration:1.0 animations:^{
         imagem.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
         texto.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
+        data.transform = CGAffineTransformMakeTranslation(0.0, 1000.0);
     } completion:^(BOOL finished) {
         if(self.navigationController.viewControllers.count >= 3){
             [self.navigationController popViewControllerAnimated:YES];
@@ -159,6 +175,9 @@ UIBarButtonItem *toolBarEdit;
     }];
 }
 
+
+//metodo chamado quando a imagem recebe um longPress
+//da "zoom"na imagem, afasta as labels para acompanhar e fala o conteúdo da label "texto"
 -(void)toqueImagemHandler:(UILongPressGestureRecognizer *)touch{
     dss = [DataSourceSingleton instance];
     if(touch.state == UIGestureRecognizerStateBegan){
@@ -172,16 +191,22 @@ UIBarButtonItem *toolBarEdit;
             [synthesizer speakUtterance:utterance];
             imagem. transform = CGAffineTransformConcat(CGAffineTransformMakeScale(1.5, 1.5), CGAffineTransformMakeTranslation(0.0, 50.0));
             texto.transform = CGAffineTransformMakeTranslation(0.0, 110.0);
+            data.transform = CGAffineTransformMakeTranslation(0.0, 80.0);
         }];
+    
+    //volta tudo pro lugar
     }else if(touch.state == UIGestureRecognizerStateEnded){
         [UIView animateWithDuration:0.4 animations:^{
             imagem. transform = CGAffineTransformConcat(CGAffineTransformMakeScale(1.0, 1.0), CGAffineTransformMakeTranslation(0.0, 0.0));
             texto.transform = CGAffineTransformMakeTranslation(0.0, 20.0);
+            data.transform = CGAffineTransformMakeTranslation(0.0, 0.0);
         }];
     }
     
 }
 
+
+//metodo para arrastar a imagem
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     //deve ter um jeito de especificar ja a subview aqui... parece pouco eficiente deste jeito...
     UITouch *toque = [touches anyObject];
@@ -200,8 +225,6 @@ UIBarButtonItem *toolBarEdit;
 }
 
 -(void)editar:(id)sender{
-//    [texto setEnabled:YES];
-//    [texto setSelected:YES];
     EditViewController *evc = [[EditViewController alloc]init];
     [self.navigationController pushViewController:evc animated:YES];
 }
@@ -209,7 +232,10 @@ UIBarButtonItem *toolBarEdit;
 -(void)atualizaConteudo{
     imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
     [texto setText: entrada.palavra];
-    
+    formatoData = [[NSDateFormatter alloc]init];
+    formatoData.dateStyle = NSDateIntervalFormatterMediumStyle;
+    formatoData.locale = [NSLocale currentLocale];
+    data.text = [NSString stringWithFormat:@"%@", [formatoData stringFromDate:entrada.data]];
     self.navigationItem.title = [NSString stringWithFormat:@"%c",[entrada.palavra characterAtIndex:0]];
 }
 

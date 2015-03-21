@@ -14,14 +14,14 @@
 
 @end
 
+
 DataSourceSingleton *dss;
-UITextField *texto;
-UIImageView *imagem;
-UIToolbar *toolbar;
 EntradaDicionario *entrada;
-UIImagePickerController *imagePicker;
+
 
 @implementation EditViewController
+
+@synthesize texto, imagem, imagePicker, datePicker, toolbar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,10 +30,19 @@ UIImagePickerController *imagePicker;
     
     [self.navigationItem setHidesBackButton:YES];
     
+    //imagepicker
     imagePicker = [[UIImagePickerController alloc]init];
     imagePicker.delegate = self;
     imagePicker.allowsEditing = YES;
     
+    //objeto date picker - modeDate indica que recebe apenas dia, mes e ano
+    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 300, 0, 0)];
+    //o date picker nao aceita redimensionamento via frame, mas funciona com transform
+    datePicker.transform = CGAffineTransformMakeScale(0.8, 0.8);
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    //como a data salva contem apenas dia, mes ano, nao é possível inicializar o datePicker a partir deste objeto. seria necessario trata-lo antes
+    //[datePicker setDate:entrada.data animated:YES];
     
     dss = [DataSourceSingleton instance];
     entrada = [dss buscarPorIndice:dss.letra];
@@ -41,12 +50,14 @@ UIImagePickerController *imagePicker;
     imagem = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width/2)-100, 80, 200, 200)];
     imagem.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@",[dss buscarPorIndice:dss.letra].img]];
     
-    texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 20)];
+    texto = [[UITextField alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 20)];
     texto.text = [NSString stringWithFormat:@"%@", entrada.palavra];
     texto.textAlignment = NSTextAlignmentCenter;
     [texto setEnabled:YES];
-    texto.center = self.view.center;
     
+    
+    
+    //toolbar e seus items
     toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 90), self.view.frame.size.width, 40)];
     
     UIBarButtonItem *toolBarConfirma = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmar:)];
@@ -59,11 +70,13 @@ UIImagePickerController *imagePicker;
     NSArray *toolBarItems = [NSArray arrayWithObjects:spacer, toolBarConfirma, spacer, picturePicker, spacer, nil];
     [toolbar setItems:toolBarItems];
     
-    [texto becomeFirstResponder];
+    //[texto becomeFirstResponder];
     
+    //adicionando subviews
     [self.view addSubview:imagem];
     [self.view addSubview:texto];
     [self.view addSubview:toolbar];
+    [self.view addSubview:datePicker];
     
     
 }
@@ -84,6 +97,7 @@ UIImagePickerController *imagePicker;
     }
     //Agora feito por Realm! Mudanças persistem!
     [dss trocarEmIndice:dss.letra porPalavra:texto.text];
+    [dss trocarEmIndice:dss.letra porData:datePicker.date];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -102,6 +116,7 @@ UIImagePickerController *imagePicker;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+//salva a imagem na EntradaDicionario correspondente
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [imagePicker dismissViewControllerAnimated:YES completion:nil];
     UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];

@@ -72,7 +72,7 @@ EntradaDicionario *entrada;
     //LetraViewController *viewLetra = [[LetraViewController alloc]init];
     dss.letra = (int)[indexPath row];
     
-    //pega a navigation do view controller na outra tab, para evitar
+    //pega a navigation do view controller na outra tab... maas é a maior gambiarra, aparentemente
     UINavigationController *navOriginal = [self.tabBarController.viewControllers objectAtIndex:0];
     
     [navOriginal pushViewController:[[LetraViewController alloc]init] animated:YES];

@@ -10,4 +10,10 @@
 
 @interface EditViewController : UITabBarController <UIImagePickerControllerDelegate>
 
+@property UITextField *texto;
+@property UIImageView *imagem;
+@property UIToolbar *toolbar;
+@property UIImagePickerController *imagePicker;
+@property UIDatePicker *datePicker;
+
 @end

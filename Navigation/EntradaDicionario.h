@@ -14,5 +14,6 @@
 @property int letraIndex;
 @property NSString *palavra;
 @property NSString *img;
+@property NSDate *data;
 
 @end

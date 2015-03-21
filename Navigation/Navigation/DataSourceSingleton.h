@@ -21,6 +21,8 @@
 
 -(void)trocarEmIndice:(int)i porPalavra:(NSString*)palavra;
 
+-(void)trocarEmIndice:(int)i porData:(NSDate*)data;
+
 -(EntradaDicionario *)buscarPorIndice:(int)i;
 
 -(void)salvarFoto:(UIImage *)foto comNome:(NSString *)nome eLetra:(int)letra;
